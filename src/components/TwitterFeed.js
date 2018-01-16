@@ -9,6 +9,12 @@ class TwitterFeed extends Component {
     }
   }
 
+  componentWillMount() {
+    fetch('http://localhost:4567/api/v1/tweets')
+    .then((response) => response.json())
+    .then((json) => this.setState({ tweets: json }))
+  }
+
   render() {
     let tweets = this.state.tweets.map(tweet => {
       return <Tweet key={tweet.id_str} tweet={tweet} />
